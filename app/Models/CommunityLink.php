@@ -9,6 +9,11 @@ class CommunityLink extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'link'
+    ];
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');

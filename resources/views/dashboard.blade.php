@@ -8,15 +8,25 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Here you will see the Community Links!") }}
-                    @foreach ($links as $link)
-                    <li>{{$link->title}}</li>
-                    <small>Contributed by: {{$link->creator->name}} {{$link->updated_at->diffForHumans()}}</small>
-                    @endforeach
-                    {{$links->links()}}
+                <div class="grid grid-cols-3 gap-4 p-6">
+                    <div class="col-span-2 p-6 text-gray-900 dark:text-gray-100">
+                        @foreach ($links as $link)
+                        <hr />
+                        <br />
+                        <li>{{$link->title}}</li>
+                        <small>Contributed by: {{$link->creator->name}} {{$link->updated_at->diffForHumans()}}</small>
+                        <br><br>
+                        @endforeach
+                        {{$links->links()}}
+                    </div>
+                    <div class="grid col-span-1">
+                        <x-community-add-link />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+
 </x-app-layout>
