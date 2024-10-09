@@ -2,6 +2,9 @@
     <h3 class="text-xl font-semibold mb-4 text-white">Contribute a link</h3>
     <form method="POST" action="/dashboard">
         @csrf
+        @error('link')
+        <div class="pb-3 font-semibold text-red-800 dark:text-red-500 leading-tight alert alert-danger">El fomato del enlace es incorrecto.</div>
+        @enderror
         <div class="mb-4">
             <label for="title" class="block text-white font-medium">Title:</label>
             <input type="text" id="title" name="title"
