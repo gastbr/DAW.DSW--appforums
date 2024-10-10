@@ -3,7 +3,7 @@
     <form method="POST" action="/dashboard">
         @csrf
         @error('link')
-        <div class="pb-3 font-semibold text-red-800 dark:text-red-500 leading-tight alert alert-danger">El fomato del enlace es incorrecto.</div>
+        <div class="pb-3 font-semibold text-red-800 dark:text-red-500 leading-tight alert alert-danger">{{$message}}</div>
         @enderror
         <div class="mb-4">
             <label for="title" class="block text-white font-medium">Title:</label>
@@ -17,6 +17,23 @@
             <input type="text" id="link" name="link"
                 class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="What is the URL?">
+        </div>
+
+        <div class="mb-4">
+            <label for="Channel" class="block text-white font-medium">Channel:</label>
+            <select
+                class="@error('channel_id') is-invalid @enderror mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                name="channel_id">
+                <option selected disabled>Pick a Channel...</option>
+                @foreach ($channels as $channel)
+                <option value="{{ $channel->id }}">
+                    {{ $channel->title }}
+                </option>
+                @endforeach
+            </select>
+            @error('channel_id')
+            <span class="text-red-500 mt-2">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="pt-3">

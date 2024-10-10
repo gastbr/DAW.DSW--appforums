@@ -13,7 +13,7 @@
                         <x-community-links :links='$links' />
                     </div>
                     <div class="grid col-span-1">
-                        <x-community-add-link />
+                        <x-community-add-link :channels='$channels' />
                     </div>
                 </div>
             </div>

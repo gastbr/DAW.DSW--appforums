@@ -11,7 +11,8 @@ class CommunityLink extends Model
 
     protected $fillable = [
         'title',
-        'link'
+        'link',
+        'channel_id'
     ];
 
     public function creator()
