@@ -5,7 +5,7 @@
         <div class="mb-4">
             <label for="title" class="block text-white font-medium">Title:</label>
             <input type="text" id="title" name="title"
-                class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                class="@error('title') is-invalid @else is-valid @enderror mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="What is the title of your article?" value="{{ old('title') }}">
         </div>
 
@@ -14,9 +14,6 @@
             <input type="text" id="link" name="link"
                 class="@error('link') is-invalid @else is-valid @enderror mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="What is the URL?" value="{{ old('link') }}">
-            @error('link')
-                <div class="text-red-500 mt-2">{{ $message }}</div>
-            @enderror
         </div>
 
         <div class="mb-4">
@@ -32,6 +29,12 @@
                     </option>
                 @endforeach
             </select>
+            @error('title')
+                <span class="text-red-500 mt-2">{{ $message }}</span>
+            @enderror
+            @error('link')
+                <span class="text-red-500 mt-2">{{ $message }}</span>
+            @enderror
             @error('channel_id')
                 <span class="text-red-500 mt-2">{{ $message }}</span>
             @enderror

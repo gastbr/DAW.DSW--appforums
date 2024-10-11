@@ -4,6 +4,7 @@
     @foreach ($links as $link)
         <hr />
         <br />
+
         <li class="flex justify-between">
             <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 href="{{ $link->link }}">{{ $link->title }}</a>
