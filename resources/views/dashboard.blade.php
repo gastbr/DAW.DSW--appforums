@@ -14,12 +14,12 @@
                     </div>
                     <div class="grid col-span-1">
                         <x-community-add-link :channels='$channels' />
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
     </div>
-    
+
     </div>
 
 
