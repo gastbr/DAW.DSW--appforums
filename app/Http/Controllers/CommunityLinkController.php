@@ -14,7 +14,7 @@ class CommunityLinkController extends Controller
      */
     public function index()
     {
-        $links = CommunityLink::paginate(25);
+        $links = CommunityLink::where('approved', 1)->paginate(25);
         $channels = Channel::orderBy('title', 'asc')->get();
         return view('dashboard', compact('links', 'channels'));
     }
@@ -24,7 +24,7 @@ class CommunityLinkController extends Controller
      */
     public function create()
     {
-        //
+        //S
     }
 
     /**
@@ -40,6 +40,7 @@ class CommunityLinkController extends Controller
 
         $link = new CommunityLink($data);
         $link->user_id = Auth::id();
+        $link->approved = Auth::user()->trusted ?? false;
         $link->save();
         return back();
     }
