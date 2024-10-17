@@ -24,7 +24,7 @@ class CommunityLinkController extends Controller
      */
     public function create()
     {
-        //S
+        //
     }
 
     /**
@@ -42,7 +42,12 @@ class CommunityLinkController extends Controller
         $link->user_id = Auth::id();
         $link->approved = Auth::user()->trusted ?? false;
         $link->save();
-        return back();
+
+        if ($link->approved) {
+            return back()->with('success', 'Your link was posted successfully.');
+        } else {
+            return back()->with('notice', 'Your link was sent successfully but is pending approval.');
+        }
     }
 
     /**
