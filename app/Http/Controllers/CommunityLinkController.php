@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommuntyLinkForm;
 use App\Models\CommunityLink;
 use App\Models\Channel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommunityLinkController extends Controller
 {
+
+    public function myLinks()
+    {
+        $user = Auth::id();
+        $links = CommunityLink::where('user_id', $user)->paginate(10);
+        $channels = Channel::orderBy('title', 'asc')->get();
+        return view('myLinks', compact('links', 'channels'));
+    }
+
     /**
      * Display a listing of the resource.
      */
