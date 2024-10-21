@@ -15,7 +15,7 @@ class CommunityLinkController extends Controller
     public function myLinks()
     {
         $user = Auth::id();
-        $links = CommunityLink::where('user_id', $user)->paginate(10);
+        $links = CommunityLink::where('user_id', $user)->latest('updated_at')->paginate(10);
         $channels = Channel::orderBy('title', 'asc')->get();
         return view('myLinks', compact('links', 'channels'));
     }
@@ -25,7 +25,7 @@ class CommunityLinkController extends Controller
      */
     public function index()
     {
-        $links = CommunityLink::where('approved', 1)->paginate(25);
+        $links = CommunityLink::where('approved', 1)->latest('updated_at')->paginate(25);
         $channels = Channel::orderBy('title', 'asc')->get();
         return view('dashboard', compact('links', 'channels'));
     }
@@ -44,16 +44,19 @@ class CommunityLinkController extends Controller
     public function store(CommuntyLinkForm $request)
     {
         $data = $request->validated();
-
         $link = new CommunityLink($data);
-        $link->user_id = Auth::id();
-        $link->approved = Auth::user()->trusted ?? false;
-        $link->save();
-
-        if ($link->approved) {
-            return back()->with('success', 'Your link was posted successfully.');
+        $existing = $link->hasAlreadyBeenSubmitted();
+        if ($existing) {
+            return back();
         } else {
-            return back()->with('notice', 'Your link was sent successfully but is pending approval.');
+            $link->user_id = Auth::id();
+            $link->approved = Auth::user()->trusted ?? false;
+            $link->save();
+            if ($link->approved) {
+                return back()->with('success', 'Your link was posted successfully.');
+            } else {
+                return back()->with('notice', 'Your link was sent successfully but is pending approval.');
+            }
         }
     }
 

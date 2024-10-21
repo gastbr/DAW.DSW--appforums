@@ -10,13 +10,12 @@
 
             <li class="flex justify-between">
                 <div>
+                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        href="{{ $link->link }}">{{ $link->title }}</a>
+                    <span>&nbsp | &nbsp</span>
                     <span
                         class="text-sm text-{{ $link->approved ? 'green' : 'red' }}-600">{{ $link->approved ? 'Approved' : 'Pending' }}
                     </span>
-
-                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        href="{{ $link->link }}">{{ $link->title }}</a>
-
                 </div>
 
                 <span class="inline-block px-2 py-1 h-7 text-white text-sm font-semibold rounded"
