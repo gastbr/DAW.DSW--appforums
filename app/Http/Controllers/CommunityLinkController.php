@@ -15,7 +15,7 @@ class CommunityLinkController extends Controller
     public function myLinks(Channel $channel = null)
     {
         if ($channel) {
-            $links = $channel->hasMany(CommunityLink::class)->where('approved', 1)->latest('updated_at')->paginate(25);
+            $links = $channel->communityLinks()->where('approved', 1)->latest('updated_at')->paginate(25);
         } else {
             $user = Auth::id();
             $links = CommunityLink::where('user_id', $user)->latest('updated_at')->paginate(10);

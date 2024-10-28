@@ -14,7 +14,7 @@ class Channel extends Model
         'color'
     ];
 
-    public function CommunityLinks()
+    public function communityLinks()
     {
         return $this->hasMany(CommunityLink::class);
     }
