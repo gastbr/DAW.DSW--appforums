@@ -14,8 +14,13 @@
 
                 <span class="inline-block px-2 py-1 h-7 text-white text-sm font-semibold rounded"
                     style="background-color: {{ $link->channel->color }}">
-                    {{ $link->channel->title }}
+
+                    <a href="/dashboard/{{ $link->channel->slug }}">
+                        {{ $link->channel->title }}
+                    </a>
+
                 </span>
+
             </li>
 
             <small>Contributed by: {{ $link->creator->name }} {{ $link->updated_at->diffForHumans() }}</small>
