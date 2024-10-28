@@ -12,10 +12,14 @@ use Illuminate\Support\Facades\Auth;
 class CommunityLinkController extends Controller
 {
 
-    public function myLinks()
+    public function myLinks(Channel $channel = null)
     {
-        $user = Auth::id();
-        $links = CommunityLink::where('user_id', $user)->latest('updated_at')->paginate(10);
+        if ($channel) {
+            $links = $channel->hasMany(CommunityLink::class)->where('approved', 1)->latest('updated_at')->paginate(25);
+        } else {
+            $user = Auth::id();
+            $links = CommunityLink::where('user_id', $user)->latest('updated_at')->paginate(10);
+        }
         $channels = Channel::orderBy('title', 'asc')->get();
         return view('myLinks', compact('links', 'channels'));
     }

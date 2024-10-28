@@ -33,7 +33,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/myLinks', [CommunityLinkController::class, 'myLinks'])
-    ->middleware(['auth', 'verified'])
-    ->name('myLinks');
+->middleware(['auth', 'verified'])
+->name('myLinks');
+
+Route::get('myLinks/{channel:slug}', [CommunityLinkController::class, 'myLinks']);
 
 require __DIR__ . '/auth.php';
