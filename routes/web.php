@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommunityLinkUserController;
 use App\Http\Controllers\CommunityLinkController;
 use App\Http\Controllers\ProfileController;
 use App\Models\CommunityLink;
