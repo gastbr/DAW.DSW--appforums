@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommunityLinkController;
 use App\Http\Controllers\ProfileController;
 use App\Models\CommunityLink;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,6 +12,10 @@ Route::get('/', function () {
 
 Route::post('/dashboard', [CommunityLinkController::class, 'store'])
     ->middleware(['auth', 'verified']);
+
+Route::post('/votes/{link}', [CommunityLinkUserController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('votes');
 
 Route::get('/dashboard', [CommunityLinkController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -33,8 +38,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/myLinks', [CommunityLinkController::class, 'myLinks'])
-->middleware(['auth', 'verified'])
-->name('myLinks');
+    ->middleware(['auth', 'verified'])
+    ->name('myLinks');
 
 Route::get('myLinks/{channel:slug}', [CommunityLinkController::class, 'myLinks']);
 

@@ -10,9 +10,9 @@
 
             <li class="flex justify-between">
                 <div class="flex space-x-2">
+                    <x-link-votes votes="{{ $link->users()->count() }}" linkid="{{ $link->id }}" />
                     <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                         href="{{ $link->link }}">{{ $link->title }}</a>
-                    <x-link-votes votes="{{ $link->users()->count() }}" />
                 </div>
 
                 <span class="inline-block px-2 py-1 h-7 text-white text-sm font-semibold rounded"
