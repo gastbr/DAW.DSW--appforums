@@ -4,6 +4,13 @@
     @if ($links->isEmpty())
         No approved contributions yet.
     @else
+        <div class="my-3 flex-auto space-x-0">
+            <span>Sort by: </span>
+            <a class="font-medium px-2 text-blue-600 dark:text-blue-500 hover:underline" href="dashboard?popular">Most
+                popular</a>
+            <a class="font-medium px-2 text-blue-600 dark:text-blue-500 hover:underline" href="dashboard">Remove
+                filters</a>
+        </div>
         @foreach ($links as $link)
             <hr />
             <br />
@@ -29,6 +36,6 @@
             <small>Contributed by: {{ $link->creator->name }} {{ $link->updated_at->diffForHumans() }}</small>
             <br><br>
         @endforeach
-        {{ $links->links() }}
+        {{ $links->appends($_GET)->links() }}
     @endif
 </div>
