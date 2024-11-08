@@ -4,12 +4,13 @@
     @if ($links->isEmpty())
         No approved contributions yet.
     @else
-        <div class="my-3 flex-auto space-x-0">
+        <div class="my-3 flex-auto space-x-5">
             <span>Sort by: </span>
-            <a class="font-medium px-2 text-blue-600 dark:text-blue-500 hover:underline" href="dashboard?popular">Most
+            <a class="{{ isset($_GET['popular']) ? 'border-solid border border-blue-900 rounded-md bg-blue-900' : '' }} font-medium p-1 text-blue-600 dark:text-blue-500 hover:underline"
+                href="dashboard?popular">Most
                 popular</a>
-            <a class="font-medium px-2 text-blue-600 dark:text-blue-500 hover:underline" href="dashboard">Remove
-                filters</a>
+            <a class="{{ !$_GET ? 'border-solid border border-blue-900 rounded-md bg-blue-900' : '' }} font-medium p-1 text-blue-600 dark:text-blue-500 hover:underline"
+                href="dashboard">Most recent</a>
         </div>
         @foreach ($links as $link)
             <hr />
