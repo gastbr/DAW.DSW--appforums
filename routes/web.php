@@ -22,7 +22,9 @@ Route::get('/dashboard', [CommunityLinkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('dashboard/{channel:slug}', [CommunityLinkController::class, 'index']);
+Route::get('dashboard/{channel:slug}', [CommunityLinkController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+;
 
 Route::get('/contact', function () {
     return view('contact');

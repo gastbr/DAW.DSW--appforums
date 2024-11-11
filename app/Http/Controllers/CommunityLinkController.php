@@ -17,32 +17,30 @@ class CommunityLinkController extends Controller
      */
     public function index(Channel $channel = null)
     {
+        $query = new CommunityLinkQuery();
         if ($channel) {
-            $links = CommunityLinkQuery::getByChannel($channel);
+            if (request()->exists('popular')) {
+                $links = $query->getMostPopularByChannel($channel);
+            } else {
+                $links = $query->getByChannel($channel);
+            }
         } else {
-            $links = CommunityLink::where('approved', 1);
+            if (request()->exists('popular')) {
+                $links = $query->getMostPopular();
+            } else {
+                $links = $query->getAll();
+            }
         }
-
-        if (request()->exists('popular')) {
-            $links = $links->withCount('users')->orderByDesc('users_count');
-        }
-
-        $links = $links->latest('updated_at')->paginate(25);
 
         $channels = Channel::orderBy('title', 'asc')->get();
         return view('dashboard', compact('links', 'channels'));
     }
 
-    public function myLinks(Channel $channel = null)
+    public function myLinks()
     {
-        if ($channel) {
-            $links = $channel->communityLinks()->where('approved', 1)->latest('updated_at')->paginate(25);
-        } else {
-            $user = Auth::id();
-            $links = CommunityLink::where('user_id', $user)->latest('updated_at')->paginate(10);
-        }
-        $channels = Channel::orderBy('title', 'asc')->get();
-        return view('myLinks', compact('links', 'channels'));
+        $query = new CommunityLinkQuery();
+        $links = $query->getByUser(Auth::id());
+        return view('mylinks', compact('links'));
     }
 
     /**
