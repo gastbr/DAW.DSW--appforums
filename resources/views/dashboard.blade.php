@@ -1,11 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="justify-between">
+        <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Community Contributions') }}
             </h2>
-            <form class="inline-block" action="">
-                <input type="text" value="asdasd">
+            <form class="inline-block flex flex-col" action="/dashboard" method="get">
+                <label for="title" class="inline-block text-slate-400 text-sm font-semibold text-right"></label>
+                <input placeholder="Search link..." class="py-1 mt-1 inline-block w-full rounded-md border-gray-600 bg-gray-700 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text">
             </form>
         </div>
     </x-slot>
