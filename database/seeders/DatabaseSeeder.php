@@ -19,12 +19,20 @@ class DatabaseSeeder extends Seeder
         DB::delete('delete from channels');
         // Users
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Usuario fiable',
             'email' => 'test@email.com',
             'email_verified_at' => now(),
             'password' => '123456789',
             'remember_token' => Str::random(10),
             'trusted' => 1
+        ]);
+        User::factory()->create([
+            'name' => 'Usuario no fiable',
+            'email' => 'test1@email.com',
+            'email_verified_at' => now(),
+            'password' => '123456789',
+            'remember_token' => Str::random(10),
+            'trusted' => 0
         ]);
         User::factory(10)->create();
         // Channels
