@@ -21,10 +21,10 @@ class CommunityLinkFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::all()->random()->id,
-            'channel_id' => 1,
+            'channel_id' => [1, 2, 3, 4][array_rand([1, 2, 3, 4])],
             'title' => $this->faker->sentence,
             'link' => $this->faker->url,
-            'approved' => 0
+            'approved' => rand(0, 1)
         ];
     }
 }
