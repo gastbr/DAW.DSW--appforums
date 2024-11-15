@@ -38,6 +38,13 @@ class CommunityLinkQuery
 
     public function search($text)
     {
-        return CommunityLink::where('title', 'LIKE', "%{$text}%");
+        return CommunityLink::whereAny(
+            [
+                'title',
+                'link'
+            ],
+            'LIKE',
+            "%{$text}%"
+        );
     }
 }
