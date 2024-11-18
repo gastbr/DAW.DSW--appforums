@@ -15,16 +15,17 @@ class CommunityLinkController extends Controller
     public function index()
     {
         $query = new CommunityLinkQuery();
+        $links = $query->getAll()->paginate(10);
 
-        if (request()->exists('text')) {
+/*         if (request()->exists('text')) {
             $links = $query->search(request()->get('text'));
         } else if (request()->exists('popular')) {
             $links = $query->getMostPopular();
         } else {
             $links = $query->getAll();
         }
-
-        $links = $links->latest('updated_at')->paginate(10);
+ */
+        //$links = $links->latest('updated_at');
         return response()->json($links, 200);
     }
 
